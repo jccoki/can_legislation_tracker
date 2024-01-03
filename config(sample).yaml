@@ -1,0 +1,122 @@
+version: 1
+
+Currency Tracker: 
+
+Outlook:
+    # account in use
+    account: 
+    # can only support up to 3 levels of folder hierarchy
+    folder: 
+    # these values specifies the date range that need to be processed, uses mm/dd/yyyy
+    start date: 
+    end date: 
+    # 'january|february|march|april|may|june|july|august|september|october|november|december'
+    target month: 
+    
+Quicklaw:
+    login page: https://signin.lexisnexis.com/lnaccess/app/signin?back=https%3A%2F%2Fadvance.lexis.com%3A443%2F&aci=la
+    username: 
+    password: 
+
+Links:
+    #Alberta Statutes
+    ra2a: https://advance.lexis.com/document/?pdmfid=1505209&crid=a26f6412-db40-4470-81c9-4d8f576d0e7e&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A64VY-RF31-FJTD-G1SP-00000-00&pdcontentcomponentid=280980&pdteaserkey=sr1&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr1&prid=7042afe9-fbbd-4124-adbd-3887d967392b
+    
+    #Alberta Regulations
+    argt: https://advance.lexis.com/document/?pdmfid=1505209&crid=1830f7f3-ac0f-4559-b308-dbceea266e1b&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5W24-SVD1-JFDC-X00N-00000-00&pdcontentcomponentid=280946&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=84af12bf-ea37-4591-a176-9672b330936c
+    
+    #British Columbia Statutes
+    b96all: https://advance.lexis.com/search/?pdmfid=1505209&crid=eae5bac6-d924-404d-8956-e2296a0daae2&pdsearchterms=Tobacco+Tax+Act%2C+R.S.B.C.+1996%2C+c.+452&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=ea72b21a-b9f7-4a82-aef5-0efca2f1da73
+    
+    #British Columbia Regulations
+    breg: https://advance.lexis.com/search/?pdmfid=1505209&crid=ea72b21a-b9f7-4a82-aef5-0efca2f1da73&pdsearchterms=Passenger+Transportation+Regulation%2C+B.C.+Reg.+266%2F2004&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=a26f6412-db40-4470-81c9-4d8f576d0e7e
+    
+    #Federal - English Statutes
+    rsc: https://advance.lexis.com/search/?pdmfid=1505209&crid=bc7e4504-c35c-40ab-90af-39510e0d3395&pdsearchterms=Controlled+Drugs+and+Substances+Act%2C+S.C.+1996%2C+c.+19&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=eae5bac6-d924-404d-8956-e2296a0daae2
+    
+    #Federal - English Regulations
+    sor: https://advance.lexis.com/document/?pdmfid=1505209&crid=34a13fae-ec26-476f-aeca-d057284d9645&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5W3Y-TSP1-JT99-203R-00000-00&pdcontentcomponentid=280948&pdshepid=urn%3AcontentItem%3A5FBM-NKR1-JNCK-20YN-00000-00&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=7217e602-4543-462c-9d17-cee36ec80ba3
+    
+    #Federal - French Statutes
+    lrc: https://advance.lexis.com/document/?pdmfid=1505209&crid=39fab280-e16c-4deb-806f-60f888954b7b&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5W18-HBC1-F27X-60HY-00000-00&pdcontentcomponentid=280910&pdshepid=urn%3AcontentItem%3A5FBM-NK91-JC5P-G2JB-00000-00&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=-zyxk&earg=sr0&prid=af8a48ae-d260-45af-b015-8807d4824ad8
+    
+    #Federal - French Regulations
+    dor: https://advance.lexis.com/document/?pdmfid=1505209&crid=3ee6d4f2-bb17-4dcf-9647-7be4677bd082&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5FCP-2111-F4NT-X1JV-00000-00&pdcontentcomponentid=280920&pdshepid=urn%3AcontentItem%3A5FBM-NKR1-JNCK-20YN-00000-00&pdteaserkey=sr25&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr25&prid=51c585b9-1709-4cf0-ac6e-c9c3d6e75b68
+    
+    #Manitoba Statutes
+    rsms: https://advance.lexis.com/document/?pdmfid=1505209&crid=4bb730e6-df06-469d-baeb-7ee1c5c28c46&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A65XT-H7N1-F8D9-M2K4-00000-00&pdcontentcomponentid=280998&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=f7e7d397-631e-40dc-8119-f54cfc10c6f4
+    
+    #Manitoba Regulations
+    rrmt: https://advance.lexis.com/document/?pdmfid=1505209&crid=ad37736e-c751-4ccf-8c62-071a63fde9c6&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A65XT-H3J1-JYYX-63TH-00000-00&pdcontentcomponentid=280961&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=116d2468-0358-4d3b-9c4f-206a3fc4943e
+    
+    #New Brunswick - English Statutes
+    nbs: https://advance.lexis.com/search/?pdmfid=1505209&crid=6e4b0b04-27e7-4770-ac92-036035b5d534&pdsearchterms=Tobacco+and+Electronic+Cigarette+Sales+Act%2C+SNB+1993%2C+c+T-6.1&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=or&pdquerytemplateid=&ecomp=z327k&prid=42740226-c6cb-481b-9639-f2f689dcc65c
+    
+    #New Brunswick - English Regulations
+    nbrg: https://advance.lexis.com/search/?pdmfid=1505209&crid=c2b54eaf-bbc9-4c2e-944c-4049c0b99027&pdsearchterms=N.B.+Reg.+84-133&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=ad37736e-c751-4ccf-8c62-071a63fde9c6
+    
+    #New Brunswick - French Statutes
+    lenb: https://advance.lexis.com/document/documentlink/?pdmfid=1505209&crid=caf78ea7-173f-46c4-98fe-f5f1d23a0ff0&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5VYT-9Y31-JTNR-M133-00000-00&pdcontentcomponentid=295732&pddoctitle=L.N.-B.+1993%2C+ch.+T-6.1&pdproductcontenttypeid=urn%3Apct%3A229&pdiskwicview=false&ecomp=z3v7k&prid=6e4b0b04-27e7-4770-ac92-036035b5d534
+    
+    #New Brunswick - French Regulations
+    rgnb: https://advance.lexis.com/document/documentlink/?pdmfid=1505209&crid=42740226-c6cb-481b-9639-f2f689dcc65c&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5FBT-N7H1-JJYN-B43V-00000-00&pdcontentcomponentid=294110&pddoctitle=R%C3%A8gl.+du+N.-B.+84-133&pdproductcontenttypeid=urn%3Apct%3A231&pdiskwicview=false&ecomp=z3v7k&prid=c2b54eaf-bbc9-4c2e-944c-4049c0b99027
+    
+    #Newfoundland Statutes
+    nfls: https://advance.lexis.com/search/?pdmfid=1505209&crid=e476a766-15d9-4e2e-9020-0efc3b194154&pdsearchterms=Income+Tax+Act%2C+2000%2C+S.N.L.+2000%2C+c.+I-1.1&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=or&pdquerytemplateid=&ecomp=px4xk&prid=5cd10263-c794-4527-ad15-1e890a4111fb
+    
+    #Newfoundland Regulations
+    nflr: https://advance.lexis.com/document/?pdmfid=1505209&crid=0d18b39c-e257-4d74-9db1-3634e07b1702&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5FBT-NVP1-JTNR-M3F7-00000-00&pdcontentcomponentid=280959&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=9115e594-f8fb-4735-9f8d-64790de9ae3f
+    
+    #Northwest Territories Statutes
+    snws: https://advance.lexis.com/search/?pdmfid=1505209&crid=e5de3727-6262-498a-9251-4d27580d676e&pdsearchterms=Territorial+Court+Act%2C+R.S.N.W.T.+1988%2C+c.+T-2&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=0d18b39c-e257-4d74-9db1-3634e07b1702
+    
+    #Northwest Territories Regulations
+    rnwt: https://advance.lexis.com/search/?pdmfid=1505209&crid=b396c5f8-a6fe-4ee2-96e4-dc47d39e9bdd&pdsearchterms=Pharmacy+Regulations%2C+N.W.T.+Reg.+018-2007&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=e5de3727-6262-498a-9251-4d27580d676e
+    
+    #Nova Scotia Statutes
+    nssa: https://advance.lexis.com/search/?pdmfid=1505209&crid=b1609aa9-d100-48cd-9df0-e840376fe6a3&pdsearchterms=Protecting+Access+to+Health+Services+Act%2C+S.N.S.+2021%2C+c.+24&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=44b214f0-d038-4ca1-8801-10f5b7597e38
+    
+    #Nova Scotia Regulations
+    nsregs: https://advance.lexis.com/search/?pdmfid=1505209&crid=44b214f0-d038-4ca1-8801-10f5b7597e38&pdsearchterms=Bulk+Haulage+Regulations%2C+N.S.+Reg.+23%2F2003&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=b396c5f8-a6fe-4ee2-96e4-dc47d39e9bdd
+    
+    #Nunavut Statutes
+    nust: https://advance.lexis.com/document/?pdmfid=1505209&crid=c41585f8-e829-416f-843a-d1bb57b99a32&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A65S4-65S1-K054-G1HT-00000-00&pdcontentcomponentid=280974&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=eea0f349-1cb7-4d6e-a9ab-edba05ce3a33
+    
+    #Nunavut Regulations
+    nurt: https://advance.lexis.com/document/?pdmfid=1505209&crid=c41585f8-e829-416f-843a-d1bb57b99a32&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A65S4-65S1-K054-G1HT-00000-00&pdcontentcomponentid=280974&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=eea0f349-1cb7-4d6e-a9ab-edba05ce3a33
+    
+    #Ontario Statutes
+    rso: https://advance.lexis.com/search/?pdmfid=1505209&crid=169fb9f0-a3c6-4b37-b46c-8f1069c3a75d&pdsearchterms=Securities+Act%2C+R.S.O.+1990%2C+c.+S.5&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=c41585f8-e829-416f-843a-d1bb57b99a32
+    
+    #Ontario Regulations
+    orgt: https://advance.lexis.com/document/?pdmfid=1505209&crid=103e5d47-09c7-410c-86be-3e78ca75376d&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5W2C-V7M1-F7G6-600W-00000-00&pdcontentcomponentid=280964&pdshepid=urn%3AcontentItem%3A5FBM-NKV1-JX8W-M1N0-00000-00&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=f0a46a66-8e3c-4337-a26f-320d546808b6
+    
+    #Prince Edward Island Statutes
+    peis: https://advance.lexis.com/document/?pdmfid=1505209&crid=4f025b27-ec51-4e92-8daa-06ace69547ae&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5VX9-9S21-F8D9-M4NC-00000-00&pdcontentcomponentid=281001&pdshepid=urn%3AcontentItem%3A5FBM-NJT1-FJDY-X3F0-00000-00&pdteaserkey=sr4&pdicsfeatureid=1517129&pditab=allpods&ecomp=-zyxk&earg=sr4&prid=ac359c80-58d7-4f9d-839e-f563c5dc652a
+    
+    #Prince Edward Island Regulations
+    perg: https://advance.lexis.com/document/?pdmfid=1505209&crid=168e3134-e557-4a7e-8573-3596972764cc&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5W8J-0R21-F06F-210F-00000-00&pdcontentcomponentid=280954&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&pddocpracticeareas=urn%3Akrm%3A34533559D09B4FB09020254CB2F18245&ecomp=pbnxk&earg=sr0&prid=1e09d4a1-2527-42ea-99ce-0da345f18e9b
+    
+    #Québec - English Statutes
+    rsqt: https://advance.lexis.com/document/?pdmfid=1505209&crid=0364c2c3-ee35-413b-8c93-29860eaf3ec8&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5F3C-6R51-F2MB-S27C-00000-00&pdcontentcomponentid=280898&pdshepid=urn%3AcontentItem%3A5FBM-NK81-JC0G-6109-00000-00&pdteaserkey=sr4&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr4&prid=a6c96224-c6ca-4d67-90b7-bfbf51ff1c93
+    
+    #Québec - English Regulations
+    qrrt: https://advance.lexis.com/document/?pdmfid=1505209&crid=f78bc7fa-5043-4c63-9c2d-f064a2d37423&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A66CK-XXK1-FGY5-M3N9-00000-00&pdcontentcomponentid=280953&pddoctitle=Wang+v.+CST+Consultants+inc.%2C+%5B2021%5D+Q.J.+No.+2876&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=60c5cf77-bdea-4bcb-a3b3-195dfabce7f6
+    
+    #Québec - French Statutes
+    lrqe: https://advance.lexis.com/document/documentlink/?pdmfid=1505209&crid=3e7af0ca-bc76-4ab9-a067-9946e4dfd8e3&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5FBM-DR41-FGRY-B432-00000-00&pdcontentcomponentid=280899&pddoctitle=RLRQ%2C+ch.+S-5%2C+art.+1&pdproductcontenttypeid=urn%3Apct%3A229&pdiskwicview=false&ecomp=z3v7k&prid=0364c2c3-ee35-413b-8c93-29860eaf3ec8
+    
+    #Québec - French Regulations
+    rrqe: https://advance.lexis.com/document/documentlink/?pdmfid=1505209&crid=500c314c-808f-4797-b6f4-6ae13c79bfc1&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A66FR-NR81-FG12-62K6-00000-00&pdcontentcomponentid=280919&pddoctitle=RLRQ%2C+ch.+V-1.1%2C+r.+14&pdproductcontenttypeid=urn%3Apct%3A231&pdiskwicview=false&ecomp=z3v7k&prid=f78bc7fa-5043-4c63-9c2d-f064a2d37423
+    
+    #Saskatchewan Statutes
+    SKSA: https://advance.lexis.com/search/?pdmfid=1505209&crid=298289ff-49e5-461b-a39f-75b94d334ddc&pdsearchterms=The+Mineral+Taxation+Act%2C+1983%2C+SS+1983-84%2C+c+M-17.1&pdicsfeatureid=1517129&pdstartin=hlct%3A1%3A11&pdcaseshlctselectedbyuser=false&pdtypeofsearch=searchboxclick&pdsearchtype=SearchBox&pdqttype=and&pdquerytemplateid=&ecomp=z327k&prid=168e3134-e557-4a7e-8573-3596972764cc
+    
+    #Saskatchewan Regulations
+    SKRG: https://advance.lexis.com/document/?pdmfid=1505209&crid=2201a536-9c5e-4940-8284-6d9fb90869bb&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A5JSY-TSF1-F06F-240P-00000-00&pdcontentcomponentid=295515&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=889c579f-ad5b-4066-8db8-c616fef95e64
+    
+    #Yukon Statutes
+    ytsa: https://advance.lexis.com/document/?pdmfid=1505209&crid=ecb22e91-ce94-4280-9171-dd35e1c2909f&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A656R-3WN1-FC6N-X2JN-00000-00&pdcontentcomponentid=280973&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=71a6bedb-8d07-43f0-886a-835bc0fb7505
+    
+    #Yukon Regulations
+    ytrg: https://advance.lexis.com/document/?pdmfid=1505209&crid=cce6cb9d-ecde-4d89-871b-bc40d96243bd&pddocfullpath=%2Fshared%2Fdocument%2Flegislation-ca%2Furn%3AcontentItem%3A6412-48V1-F8SS-60J5-00000-00&pdcontentcomponentid=294523&pdteaserkey=sr0&pdicsfeatureid=1517129&pditab=allpods&ecomp=pbnxk&earg=sr0&prid=67035d50-d4db-42b2-83aa-8b11dea77a58
