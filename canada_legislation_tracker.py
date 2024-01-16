@@ -13,13 +13,17 @@ import pytz
 from webdriver_manager.chrome import ChromeDriverManager
 import datetime
 
+def generate_date_range(date1, date2):
+    for d in range(int ((date2 - date1).days) + 1):
+        yield date1 + datetime.timedelta(d)
+
 # excludes weekends on business days counting
 def add_business_days(start_date, add_days):
     current_date = start_date
     while add_days > 0:
         current_date = current_date + datetime.timedelta(days=1)
         weekday = current_date.isoweekday()
-        if weekday >= 6: # sunday = 7
+        if weekday >= 6:
             continue
         add_days = add_days - 1
     return current_date
@@ -45,7 +49,10 @@ else:
 date_received_schedule = {}
 
 # can be part of config file
-excel_date_format = "%d/%m/%Y"
+excel_date_format = "%m/%d/%Y"
+
+config_file = open("config.yaml", 'r')
+config_data = yaml.load(config_file, Loader=yaml.FullLoader)
 
 # generate the row positions for ms excel values
 excel_row_matrix = {}
@@ -93,7 +100,7 @@ for counter in range(1, 13):
 
 # build date received schedule calendar dates
 # reference material is the Link to Lexis.xlsx
-year = 2023
+year = config_data['Calendar Year']
 #datetime.datetime.now().year
 for month in range(1, 13):
     month_end = 30
@@ -145,8 +152,6 @@ for month in range(1, 13):
 
     date_received_schedule['yukon'].append(datetime.date(year, month, 15))
 
-config_file = open("config.yaml", 'r')
-config_data = yaml.load(config_file, Loader=yaml.FullLoader)
 lexisadvance_username = config_data['Quicklaw']['username']
 lexisadvance_password = config_data['Quicklaw']['password']
 lexisadvance_login_page = config_data['Quicklaw']['login page']
@@ -291,10 +296,13 @@ else:
                             if key.lower() == 'type':
                                 excel_type = value.strip()
 
+                            print(key + ': ' + value)
+
                             if 'advance currency' in key.lower():
                                 # we parse and format dates if either is in french or english format
                                 publication_date = dateparser.parse(value.strip()).date()
                                 excel_publication_date = publication_date.strftime(excel_date_format)
+                                print("Publication Date: " + excel_publication_date)
 
                                 # check if publication date for specific jurisdiction falls on date 
                                 # received schedule found on Link to Lexis.xlsx
@@ -303,29 +311,22 @@ else:
                                     # this also is applied if date received falls on Sunday                                    
                                     date_received = publication_date
                                 else:
-                                    # need to iterate the nearest date receieved date
+                                    # need to iterate the nearest date received date
                                     date_received = None
-                                    counter = 1
                                     for date_schedule in date_received_schedule[excel_jurisdiction.lower()]:
-                                        # filter dates that falls on the same month with the publication date
-                                        if publication_date.month == date_schedule.month:
-                                            # if pub date is earlier than the one on the date receieve schedule
-                                            if publication_date < date_schedule:
-                                                # base case, establish the first delta to know which is closest to the pub date
-                                                if counter == 1:
-                                                    delta = abs((date_schedule - publication_date).days)
-                                                    date_received = date_schedule
-                                                else:
-                                                    # replace delta if is closer to the date schedule
-                                                    if abs((date_schedule - publication_date).days) < delta:
-                                                        delta = abs((date_schedule - publication_date).days)
-                                                        date_received = date_schedule
-                                                counter = counter + 1                                        
-                                            else:
-                                                # pub date is probably sent one day after the supposed date received schedule
-                                                # or is delayed so we use the pub date
-                                                date_received = publication_date
-                                      
+                                        # the first date that is greater than the pub date then it is set as the date received
+                                        if publication_date < date_schedule:
+                                            date_received = date_schedule
+                                            break
+                                        else:
+                                            # ignore dates that are older than publication date
+                                            pass
+
+                                # for some reason we cannot find the date received schedule so we
+                                # we assign the publication date
+                                if date_received == None:
+                                    date_received = publication_date
+
                                 # if the date received fall on Friday, we count it to receive on Monday or plus 3 days
                                 if date_received.isoweekday() == 5:
                                     date_received = date_received + datetime.timedelta(days=3)
@@ -334,36 +335,50 @@ else:
                                     # or plus 2 days from the date it was received.                                    
                                     date_received = date_received + datetime.timedelta(days=2)
                                 else:
+                                    # if date received falls on Monday to Thursday, then we add 1 day only
                                     date_received = date_received + datetime.timedelta(days=1)
 
-                                # add 1 day if that falls on holiday
+                                # add 1 day on date received if that falls on holiday
                                 if date_received in canada_holidays:
                                     date_received = date_received + datetime.timedelta(days=1)
 
                                 excel_date_received = date_received.strftime(excel_date_format)
+                                print("Date received: " + excel_date_received)
+
+                                # how many days the document is completed between date received and date sent for update
+                                # we exclude weekends on the TAT conputation
+                                excluded_days = [6,7]
+                                actual_turnaround_time = 0
+                                # create date range between date received and date sent for update
+                                # then filter the weekends
+                                # we begin counting the TAT next day
+                                for date_value in generate_date_range(date_received + datetime.timedelta(days=1), date_sent_for_update.date()):
+                                    if date_value.isoweekday() not in excluded_days:
+                                        actual_turnaround_time = actual_turnaround_time + 1
+
+                                    # substract 1 day on TAT if the date falls on holiday
+                                    if date_value in canada_holidays:
+                                        actual_turnaround_time = actual_turnaround_time - 1
+                                        print("Date fall on holiday: " + date_value.strftime(excel_date_format))
+
+                                excel_actual_turnaround_time = actual_turnaround_time
+                                print("Actual Turnaround Time: " + str(excel_actual_turnaround_time))
 
                                 # deadline is based on current TAT which is 10 days from the received date
-                                #excel_deadline = date_received + datetime.timedelta(days=10)
                                 excel_deadline = add_business_days(date_received, 10)
                                 excel_deadline = excel_deadline.strftime(excel_date_format)
+                                print("Deadline: " + excel_deadline)
 
                                 # lag is difference from the date received (actual received of the publications)
                                 # and publication date (expected received date)
                                 excel_lag_day = date_received - publication_date
                                 excel_lag_day = excel_lag_day.days
 
-                                # how many days the document is completed between date received and date sent for update
-                                actual_turnaround_time = date_sent_for_update.date() - date_received
-                                # if date receive falls on holiday, subtract 1 day
-                                excel_actual_turnaround_time = actual_turnaround_time.days
-
                                 # if turn around time requirements exceeds 10 days, then it is considered failed
                                 if excel_actual_turnaround_time <= 10:
                                     excel_pass_or_fail = 'PASS'
                                 else:
                                     excel_pass_or_fail = 'FAIL'
-
-                            print(key + ': ' + value)
 
                 # mark the email as Read
                 outlook_message.UnRead = False                
@@ -384,8 +399,6 @@ else:
                     #html_elem = chrome_webdriver.find_element(By.XPATH, "//h2[@class='SS_HideShowSection SS_Expandable']/Span[@name='HideShowLabel']")
                     html_elem = chrome_webdriver.find_element(By.NAME, 'HideShowLabel')
                     if html_elem is not None:
-                        print('Found LexisNexis currency date: ' + html_elem.text)
-
                         html_elem_dashboard_publication_date = html_elem.text
                         html_elem_dashboard_publication_date = html_elem_dashboard_publication_date.replace('Current to ', '')
 
