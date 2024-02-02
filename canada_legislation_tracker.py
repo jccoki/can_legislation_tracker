@@ -200,8 +200,8 @@ else:
         print('Unable to locate the specified MS Outlook folder')
     else:
         outlook_messages = outlook_target_folder.Items
-        # mail items are arranged from oldest to newest so we change the sort order using received time
-        outlook_messages.Sort("[ReceivedTime]", True)
+        # mail items are arranged from newest to oldest so we change the sort order using received time
+        outlook_messages.Sort("[ReceivedTime]")
 
         # try to login first to ensure successive browser call        
         chrome_webdriver.get(lexisadvance_login_page)
@@ -311,16 +311,21 @@ else:
                                     # this also is applied if date received falls on Sunday                                    
                                     date_received = publication_date
                                 else:
-                                    # need to iterate the nearest date received date
-                                    date_received = None
-                                    for date_schedule in date_received_schedule[excel_jurisdiction.lower()]:
-                                        # the first date that is greater than the pub date then it is set as the date received
-                                        if publication_date < date_schedule:
-                                            date_received = date_schedule
-                                            break
-                                        else:
-                                            # ignore dates that are older than publication date
-                                            pass
+                                    # create a special case for nunavut as per mam Rose advise
+                                    date_received_sched_override_list = ['nova scotia', 'nunavut', 'northwest territories']
+                                    if (excel_jurisdiction.lower() in date_received_sched_override_list):
+                                        date_received = publication_date
+                                    else:
+                                        # need to iterate the nearest date received date
+                                        date_received = None
+                                        for date_schedule in date_received_schedule[excel_jurisdiction.lower()]:
+                                            # the first date that is greater than the pub date then it is set as the date received
+                                            if publication_date < date_schedule:
+                                                date_received = date_schedule
+                                                break
+                                            else:
+                                                # ignore dates that are older than publication date
+                                                pass
 
                                 # for some reason we cannot find the date received schedule so we
                                 # we assign the publication date
@@ -359,7 +364,6 @@ else:
                                     # substract 1 day on TAT if the date falls on holiday
                                     if date_value in canada_holidays:
                                         actual_turnaround_time = actual_turnaround_time - 1
-                                        print("Date fall on holiday: " + date_value.strftime(excel_date_format))
 
                                 excel_actual_turnaround_time = actual_turnaround_time
                                 print("Actual Turnaround Time: " + str(excel_actual_turnaround_time))
