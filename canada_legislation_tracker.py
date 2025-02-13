@@ -35,14 +35,10 @@ def add_business_days(start_date, add_days):
 #current_dir = Path.cwd()
 #log_file = Path(current_dir, Path(__file__).stem + '.log')
 
-# use a chrome webdriver manager as a default, then fallback on an local chrome webdriver
-try:
-    chrome_service = webdriver.ChromeService(ChromeDriverManager().install())
-except:
-    chrome_service = webdriver.ChromeService(executable_path = "resources/chromedriver.exe")
-else:
-    chrome_webdriver = webdriver.Chrome(service=chrome_service)
-    chrome_webdriver.maximize_window()
+# use a chrome webdriver no longer needs webservice as stated at
+# https://stackoverflow.com/questions/78793171/webdriver-error-when-using-selenium-error-oserror-winerror-193-1-is-not-a-v
+chrome_webdriver = webdriver.Chrome()
+chrome_webdriver.maximize_window()
 
 # build date received schedule calenday dates
 # reference material is the Link to Lexis.xlsx
@@ -210,14 +206,14 @@ else:
             html_elem = chrome_webdriver.find_element(By.ID, "userid")
             html_elem.clear()
             html_elem.send_keys(lexisadvance_username)
+            chrome_webdriver.find_element(By.ID, "signInSbmtBtn").click()
 
             html_elem = chrome_webdriver.find_element(By.ID, "password")
             html_elem.clear()
-            html_elem.send_keys(lexisadvance_password)
-            
+            html_elem.send_keys(lexisadvance_password)            
             chrome_webdriver.find_element(By.ID, "rememberMe").click()
             chrome_webdriver.find_element(By.ID, "signInSbmtBtn").click()
-        
+                    
         try:
             excel_workbook = openpyxl.load_workbook(currency_tracker_path)
         except:
@@ -297,35 +293,20 @@ else:
                                 excel_type = value.strip()
 
                             print(key + ': ' + value)
-
                             if 'advance currency' in key.lower():
                                 # we parse and format dates if either is in french or english format
                                 publication_date = dateparser.parse(value.strip()).date()
                                 excel_publication_date = publication_date.strftime(excel_date_format)
                                 print("Publication Date: " + excel_publication_date)
+                                date_received = None
 
                                 # check if publication date for specific jurisdiction falls on date 
-                                # received schedule found on Link to Lexis.xlsx
+                                # received schedule found on Link to Lexis.xlsx else
+                                # set the date received schedule using the publication date
                                 if publication_date in date_received_schedule[excel_jurisdiction.lower()]:
-                                    # if the publication date is same day with date received schedule date, we give 1 day allowance
-                                    # this also is applied if date received falls on Sunday                                    
                                     date_received = publication_date
                                 else:
-                                    # create a special case for nunavut as per mam Rose advise
-                                    date_received_sched_override_list = ['nova scotia', 'nunavut', 'northwest territories']
-                                    if (excel_jurisdiction.lower() in date_received_sched_override_list):
-                                        date_received = publication_date
-                                    else:
-                                        # need to iterate the nearest date received date
-                                        date_received = None
-                                        for date_schedule in date_received_schedule[excel_jurisdiction.lower()]:
-                                            # the first date that is greater than the pub date then it is set as the date received
-                                            if publication_date < date_schedule:
-                                                date_received = date_schedule
-                                                break
-                                            else:
-                                                # ignore dates that are older than publication date
-                                                pass
+                                    date_received = publication_date
 
                                 # for some reason we cannot find the date received schedule so we
                                 # we assign the publication date
@@ -368,8 +349,10 @@ else:
                                 excel_actual_turnaround_time = actual_turnaround_time
                                 print("Actual Turnaround Time: " + str(excel_actual_turnaround_time))
 
-                                # deadline is based on current TAT which is 10 days from the received date
-                                excel_deadline = add_business_days(date_received, 10)
+                                # deadline is based on current TAT which is 7 days from the received date
+                                excel_deadline = add_business_days(date_received, 7)
+                                if excel_deadline in canada_holidays:
+                                    excel_deadline = excel_deadline + datetime.timedelta(days=1)
                                 excel_deadline = excel_deadline.strftime(excel_date_format)
                                 print("Deadline: " + excel_deadline)
 
@@ -379,7 +362,7 @@ else:
                                 excel_lag_day = excel_lag_day.days
 
                                 # if turn around time requirements exceeds 10 days, then it is considered failed
-                                if excel_actual_turnaround_time <= 10:
+                                if excel_actual_turnaround_time <= 7:
                                     excel_pass_or_fail = 'PASS'
                                 else:
                                     excel_pass_or_fail = 'FAIL'
